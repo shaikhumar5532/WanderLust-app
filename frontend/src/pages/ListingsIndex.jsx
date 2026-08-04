@@ -8,7 +8,7 @@ import {
 } from 'react-icons/fa';
 
 // Setup API endpoint constant
-const API_URL = 'http://localhost:8080';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const CATEGORIES = [
   { id: 'all', label: 'All', icon: FaCompass => <FaFire /> },

@@ -199,13 +199,38 @@ Follow these steps to configure the backend and frontend modules locally.
     ```bash
     npm install
     ```
-3.  Double-check configuration hooks:
-    *The API gateway constant inside `frontend/src/App.jsx` points to: `http://localhost:8080`.*
+3.  Create a frontend environment file at `frontend/.env`:
+    ```env
+    VITE_API_URL=https://wanderlust-app-1-ctf3.onrender.com
+    ```
+    This tells the React app which backend URL to use. For local development, you can swap it back to `http://localhost:8080` if needed.
 4.  Run the Vite development server:
     ```bash
     npm run dev
     ```
     *The client app launches at `http://localhost:5173`.*
+
+### 3️⃣ Deploying the Frontend to Netlify
+
+1. Build the frontend for production:
+   ```bash
+   cd frontend
+   npm run build
+   ```
+2. In Netlify, create a new site from the `frontend` folder.
+3. Set the build command to:
+   ```bash
+   npm run build
+   ```
+4. Set the publish directory to:
+   ```bash
+   dist
+   ```
+5. Ensure the frontend environment variable is configured in Netlify as:
+   ```env
+   VITE_API_URL=https://wanderlust-app-1-ctf3.onrender.com
+   ```
+6. Deploy the site.
 
 ---
 
