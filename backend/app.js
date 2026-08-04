@@ -78,16 +78,35 @@ async function connectDB() {
 
 const dbPromise = connectDB();
 
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || origin.startsWith("http://localhost:")) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true
-}));
+// ===================== CORS =====================
+const allowedOrigins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://soft-lolly-dfca16.netlify.app",
+    "https://wanderlust-app-1-ctf3.onrender.com",
+];
+
+app.use(
+    cors({
+        origin: function (origin, callback) {
+            // Allow requests without an Origin header (Postman, Hoppscotch, etc.)
+            if (!origin) {
+                return callback(null, true);
+            }
+
+            if (allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            }
+
+            return callback(new Error("Not allowed by CORS"));
+        },
+        credentials: true,
+    })
+);
+
+// Required when behind Render's proxy
+app.set("trust proxy", 1);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -100,7 +119,7 @@ const store = MongoStore.create({
     touchAfter: 24 * 3600,
 })
 
-store.on("error", () => {
+store.on("error", (err) => {
     console.log("ERROR in MONGO SESSION STORE", err);
 });
 
@@ -108,12 +127,15 @@ const sessionOptions = {
     store,
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: true,
-    cookie: { 
-        expires: Date.now() + 7 * 24 * 60 *1000,
-        maxAge:  7 * 24 * 60 * 1000,
+    saveUninitialized: false,
+    proxy: true,
+    cookie: {
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true,
-    }
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    },
 };
 
 // app.get("/", (req, res) => {
