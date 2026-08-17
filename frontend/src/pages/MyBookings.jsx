@@ -105,9 +105,16 @@ export default function MyBookings() {
                   onClick={() => navigate(`/listings/${listing._id}`)}
                 >
                   <img 
-                    src={listing.image?.url} 
+                    src={
+                      typeof listing.image === 'string'
+                        ? listing.image
+                        : (listing.image?.url || 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=cover&w=800&q=80')
+                    } 
                     alt={listing.title} 
                     className="listing-card-image"
+                    onError={(e) => {
+                      e.target.src = 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=cover&w=800&q=80';
+                    }}
                   />
                 </div>
 

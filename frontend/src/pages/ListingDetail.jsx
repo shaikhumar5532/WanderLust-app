@@ -198,9 +198,16 @@ export default function ListingDetail({ currentUser }) {
         <div>
           <div className="detail-image-box">
             <img 
-              src={listing.image?.url || 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=cover&w=1200&q=80'} 
+              src={
+                typeof listing.image === 'string' 
+                  ? listing.image 
+                  : (listing.image?.url || 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=cover&w=1200&q=80')
+              } 
               alt={listing.title} 
               className="detail-image" 
+              onError={(e) => {
+                e.target.src = 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=cover&w=1200&q=80';
+              }}
             />
           </div>
 

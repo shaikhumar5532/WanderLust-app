@@ -853,3 +853,164 @@ textarea.form-control {
   color: var(--primary);
   transform: scale(1.1);
 }
+
+/* Responsive / Mobile Media Queries */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    row-gap: 12px;
+  }
+
+  .navbar-brand {
+    order: 1;
+  }
+
+  .navbar-menu {
+    order: 2;
+    gap: 12px;
+  }
+
+  .navbar-menu .nav-link {
+    display: none; /* Hide Explore/Airbnb your home text links on mobile */
+  }
+
+  .search-bar {
+    order: 3;
+    max-width: 100%;
+    margin-top: 4px;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin: 12px 0 20px;
+    padding-bottom: 12px;
+  }
+
+  .categories-container {
+    width: 100%;
+    gap: 20px;
+    padding-bottom: 4px;
+  }
+
+  .category-item {
+    min-width: 50px;
+    font-size: 11px;
+  }
+
+  .tax-toggle-box {
+    width: 100%;
+    max-width: 360px;
+    justify-content: space-between;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .main-content {
+    padding: 16px 16px 36px;
+  }
+
+  .listings-grid {
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .listing-card {
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .detail-title {
+    font-size: 24px;
+  }
+
+  .detail-container {
+    gap: 24px;
+  }
+
+  .price-card {
+    position: static;
+    max-width: 100%;
+  }
+
+  .map-container {
+    height: 250px;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-container {
+    padding: 10px 12px;
+  }
+
+  .navbar-brand {
+    font-size: 20px;
+  }
+
+  .navbar-brand svg {
+    font-size: 24px;
+  }
+
+  .search-bar {
+    padding: 6px 6px 6px 12px;
+  }
+
+  .search-bar input {
+    font-size: 13px;
+  }
+
+  .search-icon-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .detail-title {
+    font-size: 20px;
+  }
+
+  .detail-subtitle {
+    font-size: 14px;
+  }
+
+  .owner-info {
+    padding: 12px 0;
+  }
+
+  .listing-desc {
+    font-size: 14px;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .review-form {
+    padding: 16px;
+  }
+
+  .form-card {
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .form-title {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .form-group-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+

@@ -179,7 +179,11 @@ export default function ListingsIndex() {
               >
                 <div className="listing-image-container">
                   <img 
-                    src={listing.image?.url || 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=cover&w=800&q=80'} 
+                    src={
+                      typeof listing.image === 'string'
+                        ? listing.image
+                        : (listing.image?.url || 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=cover&w=800&q=80')
+                    } 
                     alt={listing.title} 
                     className="listing-card-image"
                     onError={(e) => {
